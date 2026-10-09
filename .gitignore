@@ -1,0 +1,8 @@
+# build output
+*.o
+*.img
+app/app
+# editor / OS junk
+*~
+.vscode/
+.DS_Store

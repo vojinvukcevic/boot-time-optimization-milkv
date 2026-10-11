@@ -1,0 +1,126 @@
+diff --git a/build/boards/cv181x/sg2000_milkv_duos_musl_riscv64_sd/sg2000_milkv_duos_musl_riscv64_sd_defconfig b/build/boards/cv181x/sg2000_milkv_duos_musl_riscv64_sd/sg2000_milkv_duos_musl_riscv64_sd_defconfig
+index 5786c50be..b0ebe116b 100644
+--- a/build/boards/cv181x/sg2000_milkv_duos_musl_riscv64_sd/sg2000_milkv_duos_musl_riscv64_sd_defconfig
++++ b/build/boards/cv181x/sg2000_milkv_duos_musl_riscv64_sd/sg2000_milkv_duos_musl_riscv64_sd_defconfig
+@@ -15,7 +15,7 @@ CONFIG_SENSOR_OV_OV5647=y
+ CONFIG_MIPI_PANEL_MILKV_8HD=y
+ CONFIG_UBOOT_2021_10=y
+ CONFIG_KERNEL_SRC_5.10=y
+-CONFIG_KERNEL_LZMA=y
++CONFIG_KERNEL_UNCOMPRESSED=y
+ CONFIG_SKIP_RAMDISK=y
+ CONFIG_BUILDROOT_FS=y
+ CONFIG_ENABLE_FREERTOS=y
+diff --git a/build/envsetup_milkv.sh b/build/envsetup_milkv.sh
+index 469ca5149..27b0a587d 100644
+--- a/build/envsetup_milkv.sh
++++ b/build/envsetup_milkv.sh
+@@ -631,7 +631,7 @@ function build_all()
+       build_ivs_sdk || return $?
+       build_tdl_sdk || return $?
+     fi
+-    build_pqtool_server || return $?
++    # build_pqtool_server || return $?
+   fi
+   pack_cfg || return $?
+   pack_rootfs || return $?
+diff --git a/buildroot/package/busybox/busybox.config b/buildroot/package/busybox/busybox.config
+index 69d896beb..e27a0819f 100644
+--- a/buildroot/package/busybox/busybox.config
++++ b/buildroot/package/busybox/busybox.config
+@@ -1,7 +1,7 @@
+ #
+ # Automatically generated make config: don't edit
+-# Busybox version: 1.36.1
+-# Wed May  8 17:25:31 2024
++# Busybox version: 1.37.0
++# Thu Aug 27 00:36:45 2026
+ #
+ CONFIG_HAVE_DOT_CONFIG=y
+ 
+@@ -17,6 +17,7 @@ CONFIG_SHOW_USAGE=y
+ CONFIG_FEATURE_VERBOSE_USAGE=y
+ # CONFIG_FEATURE_COMPRESS_USAGE is not set
+ CONFIG_LFS=y
++CONFIG_TIME64=y
+ # CONFIG_PAM is not set
+ CONFIG_FEATURE_DEVPTS=y
+ CONFIG_FEATURE_UTMP=y
+@@ -469,6 +470,7 @@ CONFIG_FEATURE_FIND_NEWER=y
+ CONFIG_FEATURE_FIND_SAMEFILE=y
+ CONFIG_FEATURE_FIND_EXEC=y
+ CONFIG_FEATURE_FIND_EXEC_PLUS=y
++CONFIG_FEATURE_FIND_EXEC_OK=y
+ CONFIG_FEATURE_FIND_USER=y
+ CONFIG_FEATURE_FIND_GROUP=y
+ CONFIG_FEATURE_FIND_NOT=y
+@@ -499,9 +501,9 @@ CONFIG_FEATURE_XARGS_SUPPORT_ARGS_FILE=y
+ #
+ # Init Utilities
+ #
+-# CONFIG_BOOTCHARTD is not set
+-# CONFIG_FEATURE_BOOTCHARTD_BLOATED_HEADER is not set
+-# CONFIG_FEATURE_BOOTCHARTD_CONFIG_FILE is not set
++CONFIG_BOOTCHARTD=y
++CONFIG_FEATURE_BOOTCHARTD_BLOATED_HEADER=y
++CONFIG_FEATURE_BOOTCHARTD_CONFIG_FILE=y
+ CONFIG_HALT=y
+ CONFIG_POWEROFF=y
+ CONFIG_REBOOT=y
+@@ -795,6 +797,7 @@ CONFIG_DEVMEM=y
+ # CONFIG_FLASH_LOCK is not set
+ # CONFIG_FLASH_UNLOCK is not set
+ # CONFIG_FLASHCP is not set
++CONFIG_GETFATTR=y
+ CONFIG_HDPARM=y
+ CONFIG_FEATURE_HDPARM_GET_IDENTITY=y
+ # CONFIG_FEATURE_HDPARM_HDIO_SCAN_HWIF is not set
+@@ -933,6 +936,7 @@ CONFIG_IPRULE=y
+ CONFIG_IPNEIGH=y
+ CONFIG_FEATURE_IP_ADDRESS=y
+ CONFIG_FEATURE_IP_LINK=y
++CONFIG_FEATURE_IP_LINK_CAN=y
+ CONFIG_FEATURE_IP_ROUTE=y
+ CONFIG_FEATURE_IP_ROUTE_DIR="/etc/iproute2"
+ CONFIG_FEATURE_IP_TUNNEL=y
+@@ -1007,6 +1011,7 @@ CONFIG_FEATURE_WGET_TIMEOUT=y
+ # CONFIG_WHOIS is not set
+ # CONFIG_ZCIP is not set
+ # CONFIG_UDHCPD is not set
++# CONFIG_FEATURE_UDHCPD_BOOTP is not set
+ # CONFIG_FEATURE_UDHCPD_BASE_IP_ON_MAC is not set
+ # CONFIG_FEATURE_UDHCPD_WRITE_LEASES_EARLY is not set
+ CONFIG_DHCPD_LEASES_FILE=""
+@@ -1016,7 +1021,7 @@ CONFIG_UDHCPC=y
+ CONFIG_FEATURE_UDHCPC_ARPING=y
+ CONFIG_FEATURE_UDHCPC_SANITIZEOPT=y
+ CONFIG_UDHCPC_DEFAULT_SCRIPT="/usr/share/udhcpc/default.script"
+-CONFIG_UDHCPC6_DEFAULT_SCRIPT="/usr/share/udhcpc/default.script"
++CONFIG_UDHCPC6_DEFAULT_SCRIPT=""
+ # CONFIG_UDHCPC6 is not set
+ # CONFIG_FEATURE_UDHCPC6_RFC3646 is not set
+ # CONFIG_FEATURE_UDHCPC6_RFC4704 is not set
+@@ -1151,7 +1156,6 @@ CONFIG_ASH_IDLE_TIMEOUT=y
+ CONFIG_ASH_ECHO=y
+ CONFIG_ASH_PRINTF=y
+ CONFIG_ASH_TEST=y
+-CONFIG_ASH_SLEEP=y
+ CONFIG_ASH_HELP=y
+ CONFIG_ASH_GETOPTS=y
+ CONFIG_ASH_CMDCMD=y
+diff --git a/device/generic/rootfs_overlay/duos/mnt/system/duo-init.sh b/device/generic/rootfs_overlay/duos/mnt/system/duo-init.sh
+index e155c6e37..f84d1c203 100755
+--- a/device/generic/rootfs_overlay/duos/mnt/system/duo-init.sh
++++ b/device/generic/rootfs_overlay/duos/mnt/system/duo-init.sh
+@@ -26,9 +26,9 @@ host_wake_bt=362
+ set_gpio ${host_wake_bt} 1
+ 
+ # WIFI/BT Module
+-insmod /mnt/system/ko/aic8800_bsp.ko
++#insmod /mnt/system/ko/aic8800_bsp.ko
+ sleep 0.5
+-insmod /mnt/system/ko/aic8800_fdrv.ko
++#insmod /mnt/system/ko/aic8800_fdrv.ko
+ 
+ # Insmod PWM Module
+ insmod /mnt/system/ko/cv181x_pwm.ko

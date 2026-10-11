@@ -1,0 +1,30 @@
+diff --git a/build/boards/cv181x/sg2000_milkv_duos_musl_riscv64_sd/dts_riscv/sg2000_milkv_duos_musl_riscv64_sd.dts b/build/boards/cv181x/sg2000_milkv_duos_musl_riscv64_sd/dts_riscv/sg2000_milkv_duos_musl_riscv64_sd.dts
+index 8b973d792..ea6c92a71 100644
+--- a/build/boards/cv181x/sg2000_milkv_duos_musl_riscv64_sd/dts_riscv/sg2000_milkv_duos_musl_riscv64_sd.dts
++++ b/build/boards/cv181x/sg2000_milkv_duos_musl_riscv64_sd/dts_riscv/sg2000_milkv_duos_musl_riscv64_sd.dts
+@@ -18,6 +18,11 @@
+ 
+ &i2c1 {
+ 	status = "okay";
++
++	bme280@76 {
++		compatible = "bosch,bme280";
++		reg = <0x76>;
++	};
+ };
+ 
+ &i2c2 {
+diff --git a/build/boards/default/dts/cv181x/cv181x_base.dtsi b/build/boards/default/dts/cv181x/cv181x_base.dtsi
+index aef89a8b2..10e12fe11 100644
+--- a/build/boards/default/dts/cv181x/cv181x_base.dtsi
++++ b/build/boards/default/dts/cv181x/cv181x_base.dtsi
+@@ -514,7 +514,8 @@
+ 		sd-uhs-sdr12;
+ 		sd-uhs-sdr25;
+ 		sd-uhs-sdr50;
+-		sd-uhs-sdr104;
++		/*sd-uhs-sdr104;*/
++		sdhci-caps-mask = <0x2006 0x0>;
+ 		no-sdio;
+ 		no-mmc;
+ 		/*no-1-8-v;*/

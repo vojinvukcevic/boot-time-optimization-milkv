@@ -1,0 +1,500 @@
+
+	Measurment number 1:
+		1)ROM Time: 17.680 ms
+		2)FSBL Time: 1644.709 ms
+		3)OpenSBI Time: 167.982 ms
+		4)U-Boot Time: 531.724 ms
+		5)Kernel Time: 706.408 ms
+		6)Userspace Time: 91.669 ms
+		7)Total Time: 3142.492 ms + 17.680 ms
+
+	Measurment number 2:
+		1)ROM Time: 17.694 ms
+		2)FSBL Time: 1656.134 ms
+		3)OpenSBI Time: 167.776 ms
+		4)U-Boot Time: 533.091 ms
+		5)Kernel Time: 733.130 ms
+		6)Userspace Time: 92.791 ms
+		7)Total Time: 3182.922 ms + 17.694 ms
+
+
+	Measurment number 3:
+		1)ROM Time: 17.693 ms
+		2)FSBL Time: 1651.271 ms
+		3)OpenSBI Time: 168.868 ms
+		4)U-Boot Time: 531.746 ms
+		5)Kernel Time: 706.973 ms
+		6)Userspace Time: 95.026 ms
+		7)Total Time: 3153.884 ms + 17.693 ms
+
+
+	Measurment number 4:
+		1)ROM Time: 17.693 ms
+		2)FSBL Time: 1649.820 ms
+		3)OpenSBI Time: 167.972 ms
+		4)U-Boot Time: 531.976 ms
+		5)Kernel Time: 725.918 ms
+		6)Userspace Time: 92.545 ms
+		7)Total Time: 3168.231 ms + 17.693 ms
+
+
+	Measurment number 5:
+		1)ROM Time: 17.686 ms
+		2)FSBL Time: 1652.427 ms
+		3)OpenSBI Time: 167.521 ms
+		4)U-Boot Time: 531.980 ms
+		5)Kernel Time: 720.963 ms
+		6)Userspace Time: 93.225 ms
+		7)Total Time: 3166.116 ms + 17.686 ms
+
+
+	Measurment number 6:
+		1)ROM Time: 12.419 ms
+		2)FSBL Time: 1648.713 ms
+		3)OpenSBI Time: 167.870 ms
+		4)U-Boot Time: 532.071 ms
+		5)Kernel Time: 706.142 ms
+		6)Userspace Time: 93.247 ms
+		7)Total Time: 3148.043 ms + 12.419 ms
+
+
+	Measurment number 7:
+		1)ROM Time: 17.681 ms
+		2)FSBL Time: 1668.856 ms
+		3)OpenSBI Time: 168.003 ms
+		4)U-Boot Time: 531.859 ms
+		5)Kernel Time: 709.077 ms
+		6)Userspace Time: 93.137 ms
+		7)Total Time: 3170.932 ms + 17.681 ms
+
+
+	Measurment number 8:
+		1)ROM Time: 17.689 ms
+		2)FSBL Time: 1643.906 ms
+		3)OpenSBI Time: 167.854 ms
+		4)U-Boot Time: 531.750 ms
+		5)Kernel Time: 702.313 ms
+		6)Userspace Time: 95.929 ms
+		7)Total Time: 3141.752 ms + 17.689 ms
+
+
+
+	Measurment number 9:
+		1)ROM Time: 17.692 ms
+		2)FSBL Time: 1654.749 ms
+		3)OpenSBI Time: 167.749 ms
+		4)U-Boot Time: 532.519 ms
+		5)Kernel Time: 725.518 ms
+		6)Userspace Time: 100.899 ms
+		7)Total Time: 3181.434 ms + 17.692 ms
+
+
+	Measurment number 10:
+		1)ROM Time: 17.684 ms
+		2)FSBL Time: 1646.048 ms
+		3)OpenSBI Time: 168.700 ms
+		4)U-Boot Time: 532.661 ms
+		5)Kernel Time: 720.585 ms
+		6)Userspace Time: 92.853 ms
+		7)Total Time: 3160.847 ms + 17.684 ms
+
+
+	Measurment number 11:
+		1)ROM Time: 17.685 ms
+		2)FSBL Time: 1645.094 ms
+		3)OpenSBI Time: 167.937 ms
+		4)U-Boot Time: 533.347 ms
+		5)Kernel Time: 721.634 ms
+		6)Userspace Time: 95.781 ms
+		7)Total Time: 3163.793 ms + 17.685 ms
+
+
+	Measurment number 12:
+		1)ROM Time: 17.694 ms
+		2)FSBL Time: 1647.927 ms
+		3)OpenSBI Time: 168.597 ms
+		4)U-Boot Time: 531.888 ms
+		5)Kernel Time: 704.025 ms
+		6)Userspace Time: 94.384 ms
+		7)Total Time: 3146.821 ms + 17.694 ms
+
+
+	Measurment number 13:
+		1)ROM Time: 17.681 ms
+		2)FSBL Time: 1649.224 ms
+		3)OpenSBI Time: 167.864 ms
+		4)U-Boot Time: 532.287 ms
+		5)Kernel Time: 719.058 ms
+		6)Userspace Time: 94.498 ms
+		7)Total Time: 3162.931 ms + 17.681 ms
+
+
+	Measurment number 14:
+		1)ROM Time: 17.692 ms
+		2)FSBL Time: 1647.767 ms
+		3)OpenSBI Time: 167.709 ms
+		4)U-Boot Time: 532.182 ms
+		5)Kernel Time: 708.990 ms
+		6)Userspace Time: 93.244 ms
+		7)Total Time: 3149.892 ms + 17.692 ms
+
+
+	Measurment number 15:
+		1)ROM Time: 17.693 ms
+		2)FSBL Time: 1657.090 ms
+		3)OpenSBI Time: 175.856 ms
+		4)U-Boot Time: 532.115 ms
+		5)Kernel Time: 722.029 ms
+		6)Userspace Time: 91.883 ms
+		7)Total Time: 3178.973 ms + 17.693 ms
+
+
+	Measurment number 16:
+		1)ROM Time: 17.691 ms
+		2)FSBL Time: 1648.201 ms
+		3)OpenSBI Time: 167.730 ms
+		4)U-Boot Time: 533.107 ms
+		5)Kernel Time: 704.789 ms
+		6)Userspace Time: 93.163 ms
+		7)Total Time: 3146.990 ms + 17.691 ms
+
+
+	Measurment number 17:
+		1)ROM Time: 17.696 ms
+		2)FSBL Time: 1650.294 ms
+		3)OpenSBI Time: 167.945 ms
+		4)U-Boot Time: 531.923 ms
+		5)Kernel Time: 720.744 ms
+		6)Userspace Time: 92.994 ms
+		7)Total Time: 3163.900 ms + 17.696 ms
+
+
+	Measurment number 18:
+		1)ROM Time: 17.692 ms
+		2)FSBL Time: 1644.287 ms
+		3)OpenSBI Time: 167.770 ms
+		4)U-Boot Time: 568.053 ms
+		5)Kernel Time: 685.901 ms
+		6)Userspace Time: 91.885 ms
+		7)Total Time: 3157.896 ms + 17.692 ms
+
+
+	Measurment number 19:
+		1)ROM Time: 17.705 ms
+		2)FSBL Time: 1646.603 ms
+		3)OpenSBI Time: 168.895 ms
+		4)U-Boot Time: 532.035 ms
+		5)Kernel Time: 701.354 ms
+		6)Userspace Time: 93.132 ms
+		7)Total Time: 3142.019 ms + 17.705 ms
+
+
+	Measurment number 20:
+		1)ROM Time: 17.694 ms
+		2)FSBL Time: 1646.298 ms
+		3)OpenSBI Time: 167.872 ms
+		4)U-Boot Time: 531.775 ms
+		5)Kernel Time: 735.082 ms
+		6)Userspace Time: 96.069 ms
+		7)Total Time: 3177.096 ms + 17.694 ms
+
+
+	Measurment number 21:
+		1)ROM Time: 17.689 ms
+		2)FSBL Time: 1644.386 ms
+		3)OpenSBI Time: 175.747 ms
+		4)U-Boot Time: 532.016 ms
+		5)Kernel Time: 723.540 ms
+		6)Userspace Time: 96.466 ms
+		7)Total Time: 3172.155 ms + 17.689 ms
+
+
+	Measurment number 22:
+		1)ROM Time: 17.688 ms
+		2)FSBL Time: 1649.190 ms
+		3)OpenSBI Time: 167.727 ms
+		4)U-Boot Time: 531.842 ms
+		5)Kernel Time: 721.581 ms
+		6)Userspace Time: 92.408 ms
+		7)Total Time: 3162.748 ms + 17.688 ms
+
+
+	Measurment number 23:
+		1)ROM Time: 17.693 ms
+		2)FSBL Time: 1641.759 ms
+		3)OpenSBI Time: 175.352 ms
+		4)U-Boot Time: 534.055 ms
+		5)Kernel Time: 720.755 ms
+		6)Userspace Time: 96.053 ms
+		7)Total Time: 3167.974 ms + 17.693 ms
+
+
+	Measurment number 24:
+		1)ROM Time: 17.681 ms
+		2)FSBL Time: 1651.004 ms
+		3)OpenSBI Time: 167.960 ms
+		4)U-Boot Time: 532.018 ms
+		5)Kernel Time: 741.430 ms
+		6)Userspace Time: 92.987 ms
+		7)Total Time: 3185.399 ms + 17.681 ms
+
+
+	Measurment number 25:
+		1)ROM Time: 17.691 ms
+		2)FSBL Time: 1650.913 ms
+		3)OpenSBI Time: 167.805 ms
+		4)U-Boot Time: 531.987 ms
+		5)Kernel Time: 741.158 ms
+		6)Userspace Time: 92.683 ms
+		7)Total Time: 3184.546 ms + 17.691 ms
+
+
+	Measurment number 26:
+		1)ROM Time: 17.683 ms
+		2)FSBL Time: 1647.369 ms
+		3)OpenSBI Time: 168.660 ms
+		4)U-Boot Time: 532.040 ms
+		5)Kernel Time: 684.910 ms
+		6)Userspace Time: 100.974 ms
+		7)Total Time: 3133.953 ms + 17.683 ms
+
+
+	Measurment number 27:
+		1)ROM Time: 17.676 ms
+		2)FSBL Time: 1645.979 ms
+		3)OpenSBI Time: 167.753 ms
+		4)U-Boot Time: 532.921 ms
+		5)Kernel Time: 660.028 ms
+		6)Userspace Time: 98.186 ms
+		7)Total Time: 3104.867 ms + 17.676 ms
+
+
+	Measurment number 28:
+		1)ROM Time: 17.691 ms
+		2)FSBL Time: 1647.306 ms
+		3)OpenSBI Time: 168.737 ms
+		4)U-Boot Time: 532.010 ms
+		5)Kernel Time: 708.832 ms
+		6)Userspace Time: 93.003 ms
+		7)Total Time: 3149.888 ms + 17.691 ms
+
+
+	Measurment number 29:
+		1)ROM Time: 17.678 ms
+		2)FSBL Time: 1646.131 ms
+		3)OpenSBI Time: 167.847 ms
+		4)U-Boot Time: 532.020 ms
+		5)Kernel Time: 706.965 ms
+		6)Userspace Time: 95.107 ms
+		7)Total Time: 3148.070 ms + 17.678 ms
+
+
+	Measurment number 30:
+		1)ROM Time: 17.690 ms
+		2)FSBL Time: 1645.734 ms
+		3)OpenSBI Time: 167.774 ms
+		4)U-Boot Time: 533.153 ms
+		5)Kernel Time: 723.854 ms
+		6)Userspace Time: 93.964 ms
+		7)Total Time: 3164.479 ms + 17.690 ms
+
+
+	Measurment number 31:
+		1)ROM Time: 17.680 ms
+		2)FSBL Time: 1643.643 ms
+		3)OpenSBI Time: 168.002 ms
+		4)U-Boot Time: 531.950 ms
+		5)Kernel Time: 725.911 ms
+		6)Userspace Time: 96.329 ms
+		7)Total Time: 3165.835 ms + 17.680 ms
+
+
+	Measurment number 32:
+		1)ROM Time: 17.681 ms
+		2)FSBL Time: 1645.760 ms
+		3)OpenSBI Time: 167.866 ms
+		4)U-Boot Time: 531.932 ms
+		5)Kernel Time: 725.337 ms
+		6)Userspace Time: 93.594 ms
+		7)Total Time: 3164.489 ms + 17.681 ms
+
+
+	Measurment number 33:
+		1)ROM Time: 17.696 ms
+		2)FSBL Time: 1644.033 ms
+		3)OpenSBI Time: 167.916 ms
+		4)U-Boot Time: 532.038 ms
+		5)Kernel Time: 722.298 ms
+		6)Userspace Time: 92.551 ms
+		7)Total Time: 3158.836 ms + 17.696 ms
+
+
+	Measurment number 34:
+		1)ROM Time: 17.690 ms
+		2)FSBL Time: 1641.983 ms
+		3)OpenSBI Time: 168.084 ms
+		4)U-Boot Time: 531.660 ms
+		5)Kernel Time: 675.894 ms
+		6)Userspace Time: 99.082 ms
+		7)Total Time: 3116.703 ms + 17.690 ms
+
+
+	Measurment number 35:
+		1)ROM Time: 17.672 ms
+		2)FSBL Time: 1645.303 ms
+		3)OpenSBI Time: 168.935 ms
+		4)U-Boot Time: 531.791 ms
+		5)Kernel Time: 707.160 ms
+		6)Userspace Time: 94.927 ms
+		7)Total Time: 3148.116 ms + 17.672 ms
+
+
+	Measurment number 36:
+		1)ROM Time: 17.699 ms
+		2)FSBL Time: 1642.184 ms
+		3)OpenSBI Time: 168.920 ms
+		4)U-Boot Time: 532.335 ms
+		5)Kernel Time: 722.556 ms
+		6)Userspace Time: 90.977 ms
+		7)Total Time: 3156.972 ms + 17.699 ms
+
+
+	Measurment number 37:
+		1)ROM Time: 17.687 ms
+		2)FSBL Time: 1646.172 ms
+		3)OpenSBI Time: 168.005 ms
+		4)U-Boot Time: 532.930 ms
+		5)Kernel Time: 740.870 ms
+		6)Userspace Time: 91.863 ms
+		7)Total Time: 3179.840 ms + 17.687 ms
+
+
+	Measurment number 38:
+		1)ROM Time: 15.788 ms
+		2)FSBL Time: 1646.170 ms
+		3)OpenSBI Time: 168.780 ms
+		4)U-Boot Time: 531.102 ms
+		5)Kernel Time: 659.909 ms
+		6)Userspace Time: 98.987 ms
+		7)Total Time: 3104.948 ms + 15.788 ms
+
+
+	Measurment number 39:
+		1)ROM Time: 17.693 ms
+		2)FSBL Time: 1643.250 ms
+		3)OpenSBI Time: 168.657 ms
+		4)U-Boot Time: 532.104 ms
+		5)Kernel Time: 739.998 ms
+		6)Userspace Time: 93.814 ms
+		7)Total Time: 3177.823 ms + 17.693 ms
+
+
+	Measurment number 40:
+		1)ROM Time: 24.954 ms
+		2)FSBL Time: 1647.211 ms
+		3)OpenSBI Time: 167.954 ms
+		4)U-Boot Time: 532.966 ms
+		5)Kernel Time: 659.977 ms
+		6)Userspace Time: 97.818 ms
+		7)Total Time: 3105.926 ms + 24.954 ms
+
+
+	Measurment number 41:
+		1)ROM Time: 17.684 ms
+		2)FSBL Time: 1643.128 ms
+		3)OpenSBI Time: 168.229 ms
+		4)U-Boot Time: 532.780 ms
+		5)Kernel Time: 705.833 ms
+		6)Userspace Time: 91.959 ms
+		7)Total Time: 3141.929 ms + 17.684 ms
+
+
+	Measurment number 42:
+		1)ROM Time: 17.684 ms
+		2)FSBL Time: 1650.205 ms
+		3)OpenSBI Time: 168.015 ms
+		4)U-Boot Time: 532.853 ms
+		5)Kernel Time: 742.862 ms
+		6)Userspace Time: 93.969 ms
+		7)Total Time: 3187.904 ms + 17.684 ms
+
+
+	Measurment number 43:
+		1)ROM Time: 17.681 ms
+		2)FSBL Time: 1644.246 ms
+		3)OpenSBI Time: 168.830 ms
+		4)U-Boot Time: 531.978 ms
+		5)Kernel Time: 705.809 ms
+		6)Userspace Time: 92.100 ms
+		7)Total Time: 3142.963 ms + 17.681 ms
+
+
+	Measurment number 44:
+		1)ROM Time: 17.684 ms
+		2)FSBL Time: 1650.246 ms
+		3)OpenSBI Time: 167.905 ms
+		4)U-Boot Time: 532.922 ms
+		5)Kernel Time: 675.990 ms
+		6)Userspace Time: 93.888 ms
+		7)Total Time: 3120.951 ms + 17.684 ms
+
+
+	Measurment number 45:
+		1)ROM Time: 17.682 ms
+		2)FSBL Time: 1647.205 ms
+		3)OpenSBI Time: 167.866 ms
+		4)U-Boot Time: 532.863 ms
+		5)Kernel Time: 660.922 ms
+		6)Userspace Time: 97.020 ms
+		7)Total Time: 3105.876 ms + 17.682 ms
+
+
+	Measurment number 46:
+		1)ROM Time: 17.690 ms
+		2)FSBL Time: 1642.157 ms
+		3)OpenSBI Time: 167.906 ms
+		4)U-Boot Time: 533.645 ms
+		5)Kernel Time: 675.331 ms
+		6)Userspace Time: 97.763 ms
+		7)Total Time: 3116.802 ms + 17.690 ms
+
+
+	Measurment number 47:
+		1)ROM Time: 17.693 ms
+		2)FSBL Time: 1644.044 ms
+		3)OpenSBI Time: 167.890 ms
+		4)U-Boot Time: 531.930 ms
+		5)Kernel Time: 708.802 ms
+		6)Userspace Time: 93.017 ms
+		7)Total Time: 3145.683 ms + 17.693 ms
+
+
+	Measurment number 48:
+		1)ROM Time: 17.681 ms
+		2)FSBL Time: 1635.092 ms
+		3)OpenSBI Time: 175.816 ms
+		4)U-Boot Time: 532.177 ms
+		5)Kernel Time: 717.628 ms
+		6)Userspace Time: 97.191 ms
+		7)Total Time: 3157.904 ms + 17.681 ms
+
+
+	Measurment number 49:
+		1)ROM Time: 17.680 ms
+		2)FSBL Time: 1642.991 ms
+		3)OpenSBI Time: 168.029 ms
+		4)U-Boot Time: 532.874 ms
+		5)Kernel Time: 744.939 ms
+		6)Userspace Time: 92.928 ms
+		7)Total Time: 3181.761 ms + 17.680 ms
+
+
+	Measurment number 50:
+		1)ROM Time: 17.695 ms
+		2)FSBL Time: 1645.368 ms
+		3)OpenSBI Time: 168.714 ms
+		4)U-Boot Time: 532.113 ms
+		5)Kernel Time: 675.741 ms
+		6)Userspace Time: 94.085 ms
+		7)Total Time: 3116.021 ms + 17.695 ms
+

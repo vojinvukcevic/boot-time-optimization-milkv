@@ -2,7 +2,7 @@
 
 Analysis and optimization of cold-boot time of an embedded Linux system on the **Milk-V Duo S** board (**Sophgo SG2000** SoC, RISC-V core), starting from the vendor BSP (`duo-buildroot-sdk-v2`).
 
-This is my Bachelor's thesis at the School of Electrical Engineering, University of Belgrade (mentor: Dr Vladimir Rajović).
+This is my Bachelor's thesis at the School of Electrical Engineering, University of Belgrade (mentor: Dr Vladimir Rajović). The full thesis (in Serbian) is in [`docs/thesis.pdf`](docs/thesis.pdf).
 
 | | Vendor BSP | Optimized | Reduction |
 |---|---:|---:|---:|
@@ -12,6 +12,8 @@ This is my Bachelor's thesis at the School of Electrical Engineering, University
 Every change is a **configuration, device tree or ordering change**. No application code was modified, no hardware was changed, and no functionality was removed.
 
 ![Boot phase durations, reference vs. optimized](docs/img/phases.png)
+
+*Mean duration of each boot phase, 50 runs per configuration. Orange: vendor BSP ("Referentna"), green: optimized ("Optimizovana"). Figure from the thesis, labels in Serbian ("Korisnički prostor" = userspace).*
 
 ---
 
@@ -27,6 +29,8 @@ Every change is a **configuration, device tree or ordering change**. No applicat
   - [Userspace](#userspace)
 - [Results](#results)
 - [Future work](#future-work)
+- [Patches](#patches)
+- [Manual changes on the target](#manual-changes-on-the-target)
 - [Reproducing](#reproducing)
 - [Repository layout](#repository-layout)
 - [References](#references)
@@ -91,6 +95,8 @@ The kernel's own timestamps start at kernel entry, so they miss ROM, FSBL, OpenS
 
 ![Measurement setup](docs/img/setup.jpg)
 
+*Milk-V Duo S (top), BME280 sensor and Raspberry Pi Pico 2 W on the breadboard (bottom).*
+
 **Measurement chain:**
 
 ```
@@ -115,7 +121,7 @@ Milk-V Duo S ──UART──► Raspberry Pi Pico 2 W ──USB──► Host P
   ```sh
   grabserial -d /dev/ttyACM0 -b 115200 -t -e 20 -o boot_full.log
   ```
-- **Automatic phase extraction** ([`measurement/parse_boot.sh`](measurement/parse_boot.sh)): a bash script finds the phase boundary messages and computes each phase as the difference between consecutive timestamps:
+- **Automatic phase extraction** ([`measurement/parse_boot.sh`](measurement/parse_boot.sh)): a bash script reads `boot_full.log` from the current directory, finds the phase boundary messages, computes each phase as the difference between consecutive timestamps and appends the result to `all_measurments.log`:
 
   | Phase | Boundary message |
   |---|---|
@@ -185,7 +191,7 @@ LZMA was the worst option on this hardware by almost a full second. Switched to 
 
 **Finding the real cost.** `initcall_debug` was tried first, but the sum of all initcalls was only a few hundred milliseconds. Worse, with full console output it printed 898 lines during the kernel stage, about 5.4 s of serial output, so the measurement was dominated by its own logging. Analysis switched to the same timestamp-gap method used for U-Boot.
 
-**1. Console log level (−1.44 s).** The vendor passes `loglevel=9`, which equals 8 (everything), so hundreds of lines go to the serial port at ~6 ms each. Setting `loglevel=0` leaves only emergency messages on the console. Messages still go to the ring buffer, whose size was increased so the whole boot log can be read later with `dmesg` at no serial cost. Applied last, because kernel messages were needed while working on the other changes.
+**1. Console log level (−1.44 s).** The vendor passes `loglevel=9`, which equals 8 (everything), so hundreds of lines go to the serial port at ~6 ms each. Setting `loglevel=0` (in the boot arguments U-Boot passes to the kernel, `include/configs/cv181x-asic.h`) leaves only emergency messages on the console. Messages still go to the ring buffer, whose size was increased (the vendor's `CONFIG_LOG_BUF_SHIFT=15` override was dropped in favor of the larger default) so the whole boot log can be read later with `dmesg` at no serial cost. Applied last, because kernel messages were needed while working on the other changes.
 
 **2. SD card tuning, again (−2.3 s).** With a quiet console, the kernel stage broke down like this (single run, after the U-Boot changes):
 
@@ -231,7 +237,7 @@ Userspace scripts run silently, so the init script loop was first extended to pr
   ethtool -s eth0 speed 100 duplex full autoneg off
   ```
 
-**2. Removed unused init scripts (−680 ms):**
+**2. Removed unused init scripts (−680 ms).** These changes were made directly on the target's root filesystem, see [Manual changes on the target](#manual-changes-on-the-target):
 - Network services: DHCP client (the most expensive script; addresses are static here) and interface configuration (only loopback was configured).
 - Daemons: syslog (the kernel ring buffer covers this), cron, and remote shell access.
 - Bluetooth support.
@@ -240,7 +246,7 @@ Emptying a script doesn't remove its cost, because launching it still forks a pr
 
 **3. Removed the multimedia subsystem (−670 ms).** The vendor `loadsystemko.sh` loaded **18 kernel modules** for camera capture, video processing, display and encoding, each one a new process plus a file read from the card. None are used here. Only the thermal management module was kept: it throttles the CPU clock on overheating, which is hardware protection, and its boot cost is negligible.
 
-**4. Shortened the init chain (−260 ms).** After removing the scripts, the rc mechanism existed only to start one program, so the application is launched directly from `inittab` ([`rootfs/inittab`](rootfs/inittab)), removing two intermediate processes.
+**4. Shortened the init chain (−260 ms).** After removing the scripts, the rc mechanism existed only to start one program, so the application is launched directly from `inittab` ([`rootfs/etc/inittab`](rootfs/etc/inittab)), removing two intermediate processes.
 
 ---
 
@@ -268,6 +274,8 @@ Mean of 50 runs per configuration (± standard error, σ = standard deviation):
 
 ![Distribution of total boot time](docs/img/histogram.png)
 
+*Distribution of total boot time over 50 runs: vendor BSP (left) and optimized (right); dashed line = mean. Figure from the thesis, labels in Serbian.*
+
 **Observations:**
 - **Boot also became more predictable.** The standard deviation of total boot time dropped from 73 ms to 23 ms.
 - **The FSBL "saving" is not an optimization result.** FSBL was not modified. In the reference series, 27 runs clustered tightly around 1670 ms while the rest scattered between 1704 and 1869 ms, raising the mean; this effect did not appear in the optimized series. The cause is still unknown and is a possible direction for further work.
@@ -285,20 +293,50 @@ Mean of 50 runs per configuration (± standard error, σ = standard deviation):
 
 ---
 
+## Patches
+
+All changes to the vendor SDK are in [`patches/`](patches/), generated with `git diff` against `duo-buildroot-sdk-v2`:
+
+| Patch | Contents |
+|---|---|
+| [`01-u-boot.patch`](patches/01-u-boot.patch) | U-Boot defconfig (`bootdelay=0`; display, BMP, LZMA/LZ4, vendor video command and random MAC removed), I2C1 pin muxing for the BME280 in `board.c`, kernel `loglevel=0` in the boot arguments |
+| [`02-kernel-config.patch`](patches/02-kernel-config.patch) | Kernel defconfig: Bluetooth, Wi-Fi, SPI NOR, USB video, sound and suspend removed; `IIO` + `BMP280` enabled; larger log buffer |
+| [`03-device-tree.patch`](patches/03-device-tree.patch) | BME280 node on `i2c1`; SDR104 disabled and `sdhci-caps-mask = <0x2006 0x0>` on the SD controller |
+| [`04-build-and-rootfs.patch`](patches/04-build-and-rootfs.patch) | Uncompressed kernel image (`CONFIG_KERNEL_UNCOMPRESSED`), Wi-Fi modules no longer loaded in `duo-init.sh`, BusyBox config (incl. `bootchartd` used during analysis), `pqtool_server` build disabled |
+
+---
+
+## Manual changes on the target
+
+The userspace optimizations were applied directly on the root filesystem of the SD card rather than through the Buildroot overlay, so they are not part of the patches:
+
+- Unused init scripts in `/etc/init.d/` were renamed so `rcS` no longer picks them up: DHCP client, network interface configuration, syslog, cron, remote shell access and Bluetooth.
+- `/mnt/system/ko/loadsystemko.sh` was trimmed so the 18 multimedia kernel modules are no longer loaded; only the thermal management module is kept.
+- `/etc/inittab` was replaced with [`rootfs/etc/inittab`](rootfs/etc/inittab).
+
+---
+
 ## Reproducing
 
-1. Clone the vendor SDK:
+1. Clone the vendor SDK and apply the patches:
    ```sh
    git clone https://github.com/milkv-duo/duo-buildroot-sdk-v2
+   cd duo-buildroot-sdk-v2
+   git apply /path/to/this/repo/patches/*.patch
    ```
-2. Apply the changes from [`patches/`](patches/) (U-Boot and kernel defconfigs, device tree) and copy [`rootfs/`](rootfs/) into the Buildroot overlay directory `device/generic/br_overlay/musl_riscv64`.
+2. Build the target application from [`app/app.c`](app/app.c) with the SDK cross-compiler (`riscv64-unknown-linux-musl-gcc`) and place it in the Buildroot overlay as `device/generic/br_overlay/musl_riscv64/usr/bin/app`.
 3. Build and flash:
    ```sh
    ./build.sh milkv-duos-musl-riscv64-sd
    sudo dd if=<image>.img of=/dev/sdX bs=1M status=progress
    ```
-4. Wire the BME280 and the Pico as shown in the tables above, flash [`measurement/pico/`](measurement/pico/) onto the Pico, and set a static address `192.168.10.1/24` with a fixed 100 Mbit/s full-duplex link on the host interface.
-5. Log a boot with `grabserial` and run [`measurement/parse_boot.sh`](measurement/parse_boot.sh) on the log.
+4. Apply the [manual changes on the target](#manual-changes-on-the-target) to the root filesystem on the SD card.
+5. Wire the BME280 and the Pico as shown in the tables above, copy [`measurement/pico/main.py`](measurement/pico/main.py) to the Pico, and set a static address `192.168.10.1/24` with a fixed 100 Mbit/s full-duplex link on the host interface.
+6. Log a boot and extract the phase durations:
+   ```sh
+   grabserial -d /dev/ttyACM0 -b 115200 -t -e 20 -o boot_full.log
+   ./parse_boot.sh            # reads boot_full.log, appends to all_measurments.log
+   ```
 
 ---
 
@@ -307,19 +345,21 @@ Mean of 50 runs per configuration (± standard error, σ = standard deviation):
 ```
 ├── README.md
 ├── patches/
-│   ├── u-boot/        # defconfig changes, bootdelay, I2C pin muxing
-│   ├── kernel/        # defconfig changes (removed drivers, IIO + BMP280)
-│   └── dts/           # sdhci-caps-mask, BME280 node on i2c1
-├── rootfs/
-│   └── inittab        # optimized BusyBox init configuration
-├── app/               # C application: sysfs read + UDP send
+│   ├── 01-u-boot.patch
+│   ├── 02-kernel-config.patch
+│   ├── 03-device-tree.patch
+│   └── 04-build-and-rootfs.patch
+├── rootfs/etc/inittab          # optimized BusyBox init configuration
+├── app/app.c                   # target application: BME280 via sysfs, UDP send
 ├── measurement/
-│   ├── pico/          # MicroPython UART bridge with power-on detection
-│   └── parse_boot.sh  # boot log → phase durations
-├── results/           # raw logs and per-run phase durations
+│   ├── pico/main.py            # MicroPython UART bridge with power-on detection
+│   └── parse_boot.sh           # boot log → phase durations
+├── results/
+│   ├── reference_50_runs.log   # vendor BSP, 50 cold boots
+│   └── optimized_50_runs.log   # optimized, 50 cold boots
 └── docs/
-    ├── thesis.pdf     # full thesis (in Serbian)
-    └── img/           # setup photo and charts
+    ├── thesis.pdf              # full thesis (in Serbian)
+    └── img/                    # figures and setup photo
 ```
 
 ---
